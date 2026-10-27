@@ -112,7 +112,13 @@
   img.onload = () => { img.hidden = false; ph.hidden = true; };
   img.onerror = () => { img.hidden = true; ph.hidden = false; };
   let fromGallery = false;
-  const openAt = (p, g) => { fromGallery = !!g; if (g) gal.hidden = true; viewer.hidden = false; show(p, 1); sync(); };
+  const tip = document.createElement('div'); tip.id = 'swipeTip'; tip.textContent = '← ปัดซ้าย-ขวาเพื่อเปลี่ยนไพ่ →'; document.body.appendChild(tip);
+  let tipShown = false;
+  const showTip = () => {
+    if (tipShown || !matchMedia('(hover:none) and (pointer:coarse)').matches) return;
+    tipShown = true; tip.classList.add('on'); setTimeout(() => tip.classList.remove('on'), 2800);
+  };
+  const openAt = (p, g) => { showTip(); fromGallery = !!g; if (g) gal.hidden = true; viewer.hidden = false; show(p, 1); sync(); };
   const closeViewer = () => {
     viewer.hidden = true;
     if (fromGallery) { fromGallery = false; gal.hidden = false; }
@@ -129,32 +135,30 @@
      (ปัญหาเดิม: pointerup ไม่ถูกยิงบนมือถือเพราะโดน pointercancel) */
   viewer.style.touchAction = 'pan-y';
   lb.style.touchAction = 'pan-y';
-  let sx = 0, sy = 0, tracking = false;
-  const swipeStart = e => { sx = e.clientX; sy = e.clientY; tracking = true; };
-  const swipeEnd = e => {
-    if (!tracking) return; tracking = false;
-    const dx = e.clientX - sx, dy = e.clientY - sy;
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+  let sx = 0, sy = 0, tracking = false, swallowClick = false;
+  const swipeStart = (x, y) => { sx = x; sy = y; tracking = true; };
+  const swipeEnd = (x, y) => {
+    if (!tracking) return false; tracking = false;
+    const dx = x - sx, dy = y - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
       const dir = dx < 0 ? 1 : -1;
       show(cur + dir, dir);
       swallowClick = true; setTimeout(() => swallowClick = false, 350);
+      return true;
     }
+    return false;
   };
-  let swallowClick = false;
-  viewer.addEventListener('pointerdown', swipeStart);
-  viewer.addEventListener('pointerup', swipeEnd);
-  viewer.addEventListener('pointercancel', () => { tracking = false; });
+  // มือถือ: ใช้ touch events (เสถียรกว่า pointer events บน Chrome/Android) / เมาส์: ใช้ pointer events
+  viewer.addEventListener('touchstart', e => { const t = e.touches[0]; swipeStart(t.clientX, t.clientY); }, { passive: true });
+  viewer.addEventListener('touchend', e => { const t = e.changedTouches[0]; swipeEnd(t.clientX, t.clientY); }, { passive: true });
+  viewer.addEventListener('touchcancel', () => { tracking = false; }, { passive: true });
+  viewer.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse') swipeStart(e.clientX, e.clientY); });
+  viewer.addEventListener('pointerup', e => { if (e.pointerType === 'mouse') swipeEnd(e.clientX, e.clientY); });
   // กันไม่ให้การปัดไปกดโดนรูป (เปิด lightbox) โดยไม่ตั้งใจ
   viewer.addEventListener('click', e => { if (swallowClick) { e.stopPropagation(); e.preventDefault(); } }, true);
   // ปัดในโหมดขยายรูป = เลื่อนไพ่เช่นกัน
-  lb.addEventListener('pointerdown', swipeStart);
-  lb.addEventListener('pointerup', e => {
-    const x0 = sx, y0 = sy, wasTracking = tracking;
-    swipeEnd(e);
-    if (wasTracking && Math.abs(e.clientX - x0) > 45 && Math.abs(e.clientX - x0) > Math.abs(e.clientY - y0) * 1.2) {
-      lbImg.src = img.src; // อัปเดตรูปขยายให้ตรงใบใหม่
-    }
-  });
+  lb.addEventListener('touchstart', e => { const t = e.touches[0]; swipeStart(t.clientX, t.clientY); }, { passive: true });
+  lb.addEventListener('touchend', e => { const t = e.changedTouches[0]; if (swipeEnd(t.clientX, t.clientY)) lbImg.src = img.src; }, { passive: true });
   img.addEventListener('load', () => { if (!lb.hidden) lbImg.src = img.src; });
 
   /* ---------- แกลเลอรี: รวมไพ่ทั้งหมดจัดเรียงสวยๆ ---------- */
@@ -164,6 +168,11 @@
     padding:9px 16px;border-radius:999px;border:1px solid rgba(240,205,120,.55);color:#f0cd78;font:inherit;font-size:14px;
     background:rgba(18,14,36,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;
     transition:background .2s,transform .2s,box-shadow .2s}
+  @media (hover:none) and (pointer:coarse){#prev,#next{display:none !important}}
+  #swipeTip{position:fixed;left:50%;bottom:max(22px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:50;
+    padding:8px 16px;border-radius:999px;background:rgba(18,14,36,.85);border:1px solid rgba(240,205,120,.5);
+    color:#f0cd78;font-size:13px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .4s}
+  #swipeTip.on{opacity:1}
   #galBtn[hidden]{display:none}
   #galBtn:hover{background:rgba(240,205,120,.16);box-shadow:0 0 18px rgba(240,205,120,.3)}
   #galBtn:active{transform:scale(.96)}
