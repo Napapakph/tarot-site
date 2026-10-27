@@ -1,6 +1,6 @@
 // ===== ตั้งค่าหลัก: แก้ที่ไฟล์นี้ไฟล์เดียว =====
 const CONFIG = {
-  CARD_COUNT: 7,             // จำนวนไพ่ที่แสดง (รูปต้องมี tarot_1 ... tarot_N)
+  CARD_COUNT: 8,             // จำนวนไพ่ที่แสดง (รูปต้องมี tarot_1 ... tarot_N)
   FOLDER: "tarot card",       // ชื่อโฟลเดอร์รูป
   FILE_PREFIX: "tarot_",      // คำนำหน้าชื่อไฟล์
   EXT: "jpg",                 // นามสกุลไฟล์ (jpg / png / webp)
