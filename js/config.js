@@ -13,7 +13,7 @@ const CONFIG = {
   WATERMARK_NOTE: "Please do not save without permission", // ข้อความเล็กใต้ลายน้ำ
   WATERMARK_NOTE2: "Not for AI training or image-generation datasets", // บรรทัดที่ 3 ของลายน้ำ
   NOTICE: "© All artwork belongs to its artists. Do not save, repost, or use any image (including screenshots) in AI training or image-generation datasets without permission.", // ข้อความใต้รายละเอียดไพ่
-  WATERMARK_OPACITY: 0.05,                                // ความจาง 0 - 1 (เลขน้อย = จางกว่า)
+  WATERMARK_OPACITY: 0.15,                                // ความจาง 0 - 1 (เลขน้อย = จางกว่า)
 };
 
 // ลำดับในอาเรย์ = เลขไฟล์ (ใบที่ 1 = tarot_1) ถ้าไม่ได้ใส่ ระบบจะใช้ค่าสำรองให้
