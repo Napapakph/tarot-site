@@ -99,6 +99,7 @@
     t += (target - t) * Math.min(1, dt * 2.6);
     if (Math.abs(target - t) < .0005) t = target;
     // ฟิสิกส์การหมุน: ปล่อยมือแล้วไหลต่อ (แรงเฉื่อย) แล้วค่อยๆ กลับไปหมุนช้าๆ เอง
+    sfx('spin', mode === 'orbit' && viewer.hidden && gal.hidden ? Math.abs(vel - AUTO) / 500 : 0);
     if (mode === 'orbit') {
       if (!ptr || !ptr.moved) vel += (AUTO - vel) * (1 - Math.exp(-dt * 1.1));
       if (!ptr || !ptr.moved) spin += vel * dt;
@@ -131,14 +132,15 @@
   }
 
   const setMode = m => { mode = m; hint.textContent = HINT[m]; again.hidden = m === 'fan'; stage.classList.toggle('orbit', m === 'orbit'); };
-  const startOrbit = v => { shuffle(); vel = v; setMode('orbit'); };
+  const sfx = (k, a) => { try { window.Snd && Snd[k](a); } catch (e) { } };   // เรียกเสียง (ถ้ามี)
+  const startOrbit = v => { shuffle(); vel = v; setMode('orbit'); sfx('shuffle'); };
   stage.addEventListener('click', e => {
     if (justDragged) return;
     if (mode === 'fan') { startOrbit(AUTO + 420); return; }
     const c = e.target.closest('.card');
     if (c) openAt(order.indexOf(+c.dataset.id));
   });
-  again.addEventListener('click', () => setMode('fan'));
+  again.addEventListener('click', () => { setMode('fan'); sfx('gather'); });
 
   /* ---------- หมุนวงไพ่เอง: สกรอเมาส์ (คอม) / ลากหรือปัด (มือถือ) ---------- */
   const degPerPx = () => 180 / (Math.PI * Ro);   // ลาก 1px = ไพ่ใบหน้าเลื่อนตามนิ้วพอดี
@@ -215,15 +217,16 @@
     if (tipShown || !matchMedia('(hover:none) and (pointer:coarse)').matches) return;
     tipShown = true; tip.classList.add('on'); setTimeout(() => tip.classList.remove('on'), 2800);
   };
-  const openAt = (p, g) => { showTip(); fromGallery = !!g; if (g) gal.hidden = true; viewer.hidden = false; show(p, 1); sync(); };
+  const openAt = (p, g) => { showTip(); fromGallery = !!g; if (g) gal.hidden = true; viewer.hidden = false; show(p, 1); sync(); sfx('pick'); };
   const closeViewer = () => {
+    sfx('close');
     viewer.hidden = true;
     if (fromGallery) { fromGallery = false; gal.hidden = false; }
     sync();
   };
   $('#close').onclick = closeViewer;
-  $('#next').onclick = () => show(cur + 1, 1);
-  $('#prev').onclick = () => show(cur - 1, -1);
+  $('#next').onclick = () => { show(cur + 1, 1); sfx('slide'); };
+  $('#prev').onclick = () => { show(cur - 1, -1); sfx('slide'); };
   $('#pic').onclick = () => { if (!img.hidden) { lbImg.src = img.src; lb.hidden = false; } };
   lb.onclick = () => { if (swallowClick) return; lb.hidden = true; };
 
@@ -239,7 +242,7 @@
     const dx = x - sx, dy = y - sy;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.2) {
       const dir = dx < 0 ? 1 : -1;
-      show(cur + dir, dir);
+      show(cur + dir, dir); sfx('slide');
       swallowClick = true; setTimeout(() => swallowClick = false, 350);
       return true;
     }
@@ -333,7 +336,7 @@
       grid.appendChild(b);
     }
   };
-  const openGallery = () => { viewer.hidden = true; lb.hidden = true; fromGallery = false; buildGallery(); gal.hidden = false; gal.scrollTop = 0; sync(); };
+  const openGallery = () => { sfx('gallery'); viewer.hidden = true; lb.hidden = true; fromGallery = false; buildGallery(); gal.hidden = false; gal.scrollTop = 0; sync(); };
   const closeGallery = () => { gal.hidden = true; sync(); };
   gBtn.onclick = openGallery;
   gal.querySelector('#galClose').onclick = closeGallery;

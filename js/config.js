@@ -9,6 +9,18 @@ const CONFIG = {
   SHOP_URL: "https://example.com",
   SHOP_LABEL: "ดูผลงานออกแบบทั้งหมด",
   DEFAULT_DESIGNER: "ชื่อนักออกแบบ",
+  MUSIC_VOLUME: 0.05,         // ความดังดนตรีคลอ 0 - 1
+  SFX_VOLUME: 0.4,            // ความดังเสียงไพ่ 0 - 1
+  SOUND_LEVELS: {             // ความดังแยกแต่ละเสียง: 1 = ปกติ, 0.5 = เบาลงครึ่งหนึ่ง, 2 = ดังขึ้น 2 เท่า, 0 = ปิดเสียงนั้น
+    shuffle: 1,               // สับไพ่
+    spin: 1,                  // เสียงลมตอนหมุนวงไพ่
+    pick: 1,                  // จับไพ่ / เปิดดูไพ่
+    slide: 1,                 // เลื่อนไพ่ใบถัดไป / ก่อนหน้า
+    gallery: 0.6,               // เปิดหน้ารวมไพ่
+    close: 1,                 // ปิดหน้าดูไพ่
+    gather: 1,                // กด "คลี่ไพ่ใหม่"
+  },
+  MUSIC_URL: "",              // ว่าง = ใช้ดนตรีที่สร้างเอง / ใส่ไฟล์ เช่น "sound/music.mp3" ถ้าอยากใช้เพลงตัวเอง
   WATERMARK: "Tarot Adoptable",                           // ลายน้ำบนไพ่ (ข้อความหลัก)
   WATERMARK_NOTE: "Please do not save without permission", // ข้อความเล็กใต้ลายน้ำ
   WATERMARK_NOTE2: "Not for AI training or image-generation datasets", // บรรทัดที่ 3 ของลายน้ำ

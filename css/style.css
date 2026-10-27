@@ -128,3 +128,14 @@ dd{line-height:1.8;margin-top:4px}
   .pic{height:min(44vh,420px)}
   .nav{top:24%}
 }
+
+/* ปุ่มเปิด/ปิดเสียง */
+#sndBtn{position:fixed;z-index:40;top:max(14px,env(safe-area-inset-top));left:14px;width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;padding:0;background:rgba(18,14,36,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(240,205,120,.55);color:#f0cd78;transition:background .2s,box-shadow .2s,opacity .2s}
+#sndBtn:hover{background:rgba(240,205,120,.16);box-shadow:0 0 16px rgba(240,205,120,.3)}
+#sndBtn svg{width:19px;height:19px}
+#sndBtn .nt{fill:currentColor}
+#sndBtn .sl{stroke:currentColor;stroke-width:2;stroke-linecap:round;opacity:0}
+#sndBtn.off{opacity:.6}
+#sndBtn.off .sl{opacity:1}
