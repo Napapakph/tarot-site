@@ -13,6 +13,7 @@ const CONFIG = {
 
 // ลำดับในอาเรย์ = เลขไฟล์ (ใบที่ 1 = tarot_1) ถ้าไม่ได้ใส่ ระบบจะใช้ค่าสำรองให้
 const CARDS = [
+  { name: "Judgement",          th: "การพิพากษา",         designer: "Alice Zo", meaning: "การตื่นรู้ การประเมินตนเอง และการเรียกร้องใหม่" },
   { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง", designer: "", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ" },
   { name: "The Magician",       th: "จอมเวท",             designer: "", meaning: "พลังสร้างสรรค์ ทักษะ และการลงมือทำให้เป็นจริง" },
   { name: "The High Priestess", th: "สตรีนักบวช",         designer: "", meaning: "สัญชาตญาณ ความลับ และปัญญาภายใน" },
@@ -33,6 +34,5 @@ const CARDS = [
   { name: "The Star",           th: "ดวงดาว",             designer: "", meaning: "ความหวัง การเยียวยา และแรงบันดาลใจ" },
   { name: "The Moon",           th: "ดวงจันทร์",          designer: "", meaning: "ความไม่แน่นอน ความฝัน และสิ่งที่ซ่อนอยู่" },
   { name: "The Sun",            th: "ดวงอาทิตย์",         designer: "", meaning: "ความสุข ความสำเร็จ และความชัดเจน" },
-  { name: "Judgement",          th: "การพิพากษา",         designer: "Alice Zo", meaning: "การตื่นรู้ การประเมินตนเอง และการเรียกร้องใหม่" },
   { name: "The World",          th: "โลก",                designer: "", meaning: "ความสมบูรณ์ การจบวงจร และการก้าวสู่ขั้นถัดไป" },
 ];
