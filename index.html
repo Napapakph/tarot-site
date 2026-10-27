@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Tarot</title>
+<!-- ขอไม่ให้นำรูป/เนื้อหาไปใช้เทรน AI หรือทำ dataset -->
+<meta name="robots" content="noai, noimageai">
+<meta name="tdm-reservation" content="1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
@@ -22,14 +25,19 @@
 </footer>
 
 <section id="viewer" hidden>
+  <canvas class="vfx" id="vfxBack"></canvas>
+  <div id="auraBox"><i class="pa"></i><i class="pa pa2"></i></div>
+  <canvas class="vfx" id="vfxFront"></canvas>
   <button class="x" id="close" aria-label="ปิด">&times;</button>
   <button class="nav prev" id="prev" aria-label="ใบก่อนหน้า">&lsaquo;</button>
   <button class="nav next" id="next" aria-label="ใบถัดไป">&rsaquo;</button>
   <div class="slide" id="slide">
-    <figure class="pic" id="pic">
-      <img id="img" alt="" hidden>
-      <div id="ph"></div>
-    </figure>
+    <div class="pw" id="pw">
+      <figure class="pic wm" id="pic">
+        <img id="img" alt="" hidden>
+        <div id="ph"></div>
+      </figure>
+    </div>
     <article class="info">
       <p class="no" id="no"></p>
       <h2 id="nm"></h2>
@@ -39,11 +47,12 @@
         <dt>ความหมาย</dt><dd id="mn"></dd>
       </dl>
       <a class="shop" target="_blank" rel="noopener"></a>
+      <p class="notice" id="notice"></p>
     </article>
   </div>
 </section>
 
-<div id="lightbox" hidden><img id="lbImg" alt=""></div>
+<div id="lightbox" hidden><div class="wm" id="lbWrap"><img id="lbImg" alt=""></div></div>
 
 <script src="js/config.js"></script>
 <script src="js/app.js"></script>
