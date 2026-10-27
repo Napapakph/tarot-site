@@ -25,6 +25,7 @@ const CARDS = [
   { name: "Temperance",         th: "ความพอดี",           designer: "Hydran Yuu", meaning: "ความสมดุล การผสานสิ่งที่ต่างกัน และความอดทน" },
   { name: "The Moon",           th: "ดวงจันทร์",          designer: "คูมผี ต้องการการพักผ่อน", meaning: "ความไม่แน่นอน ความฝัน และสิ่งที่ซ่อนอยู่" },
   { name: "The Magician",       th: "จอมเวท",             designer: "Yuzuu Yu", meaning: "พลังสร้างสรรค์ ทักษะ และการลงมือทำให้เป็นจริง" },
+  { name: "The World",          th: "โลก",                designer: "yuuh1me", meaning: "ความสมบูรณ์ การจบวงจร และการก้าวสู่ขั้นถัดไป" },
   { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง",  designer: "", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ" },
   { name: "The Empress",        th: "จักรพรรดินี",        designer: "", meaning: "ความอุดมสมบูรณ์ ความงาม และการหล่อเลี้ยง" },
   { name: "The Emperor",        th: "จักรพรรดิ",          designer: "", meaning: "โครงสร้าง อำนาจ และความมั่นคง" },
@@ -39,5 +40,5 @@ const CARDS = [
   { name: "The Devil",          th: "ปีศาจ",              designer: "", meaning: "พันธนาการ ความยึดติด และสิ่งที่ผูกมัดเราไว้" },
   { name: "The Tower",          th: "หอคอย",              designer: "", meaning: "การพังทลายอย่างฉับพลัน และความจริงที่ปรากฏ" },
   { name: "The Star",           th: "ดวงดาว",             designer: "", meaning: "ความหวัง การเยียวยา และแรงบันดาลใจ" },
-  { name: "The World",          th: "โลก",                designer: "", meaning: "ความสมบูรณ์ การจบวงจร และการก้าวสู่ขั้นถัดไป" },
+  
 ];
