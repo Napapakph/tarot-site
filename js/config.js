@@ -38,7 +38,7 @@ const CARDS = [
   { name: "The Moon",           th: "ดวงจันทร์",          designer: "คูมผี ต้องการการพักผ่อน", meaning: "ความไม่แน่นอน ความฝัน และสิ่งที่ซ่อนอยู่" },
   { name: "The Magician",       th: "จอมเวท",             designer: "Yuzuu Yu", meaning: "พลังสร้างสรรค์ ทักษะ และการลงมือทำให้เป็นจริง" },
   { name: "The World",          th: "โลก",                designer: "yuuh1me", meaning: "ความสมบูรณ์ การจบวงจร และการก้าวสู่ขั้นถัดไป" },
-  { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง",  designer: "", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ" },
+  { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง",  designer: "Alice Zo", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ ของแมวตัวอ้วนหน้าเหวี่ยง เจ้าแมวนำโชค" },
   { name: "The Empress",        th: "จักรพรรดินี",        designer: "", meaning: "ความอุดมสมบูรณ์ ความงาม และการหล่อเลี้ยง" },
   { name: "The Emperor",        th: "จักรพรรดิ",          designer: "", meaning: "โครงสร้าง อำนาจ และความมั่นคง" },
   { name: "The Hierophant",     th: "ผู้นำศาสนา",         designer: "", meaning: "ประเพณี ความเชื่อ และการเรียนรู้จากผู้รู้" },
