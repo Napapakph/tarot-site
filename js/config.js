@@ -1,6 +1,6 @@
 // ===== ตั้งค่าหลัก: แก้ที่ไฟล์นี้ไฟล์เดียว =====
 const CONFIG = {
-  CARD_COUNT: 8,             // จำนวนไพ่ที่แสดง (รูปต้องมี tarot_1 ... tarot_N)
+  CARD_COUNT: 9,             // จำนวนไพ่ที่แสดง (รูปต้องมี tarot_1 ... tarot_N)
   FOLDER: "tarot card",       // ชื่อโฟลเดอร์รูป
   FILE_PREFIX: "tarot_",      // คำนำหน้าชื่อไฟล์
   EXT: "jpg",                 // นามสกุลไฟล์ (jpg / png / webp)
@@ -9,7 +9,7 @@ const CONFIG = {
   SHOP_URL: "https://example.com",
   SHOP_LABEL: "ดูผลงานออกแบบทั้งหมด",
   DEFAULT_DESIGNER: "ชื่อนักออกแบบ",
-  MUSIC_VOLUME: 0.05,         // ความดังดนตรีคลอ 0 - 1
+  MUSIC_VOLUME: 0.15,         // ความดังดนตรีคลอ 0 - 1
   SFX_VOLUME: 0.4,            // ความดังเสียงไพ่ 0 - 1
   SOUND_LEVELS: {             // ความดังแยกแต่ละเสียง: 1 = ปกติ, 0.5 = เบาลงครึ่งหนึ่ง, 2 = ดังขึ้น 2 เท่า, 0 = ปิดเสียงนั้น
     shuffle: 1,               // สับไพ่
