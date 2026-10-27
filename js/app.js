@@ -63,6 +63,7 @@
   }
 
   /* ---------- วนลูปหลัก: t = 0 คลี่เป็นครึ่งวงกลม, t = 1 หมุนเป็นวง 3 มิติ ---------- */
+  const FAN_DROP = 0.2; // ดันไพ่ตอนคลี่ลงมา (สัดส่วนของ Rf) เพิ่มเลขเพื่อให้ต่ำลงอีก
   let mode = 'fan', t = 0, spin = 0, boost = 0, last = performance.now();
   const norm = x => ((x % 360) + 540) % 360 - 180;
   function frame(now) {
@@ -80,7 +81,7 @@
         const a = (N > 1 ? p / (N - 1) - .5 : 0) * spread, ar = a * Math.PI / 180;
         const th = norm(p * 360 / N + spin), tr = th * Math.PI / 180;
         const x = L(Rf * Math.sin(ar), Ro * Math.sin(tr));
-        const y = L(Rf * (.5 - Math.cos(ar)), Math.sin(tr * 2 + now / 900) * cw * .12);
+        const y = L(Rf * (.5 - Math.cos(ar)) + Rf * FAN_DROP, Math.sin(tr * 2 + now / 900) * cw * .12);
         const z = L(p * .5, Ro * Math.cos(tr));
         els[id].style.transform = `translate3d(${x}px,${y}px,${z}px) rotateZ(${L(a, 0)}deg) rotateY(${L(0, th)}deg)`;
       });
@@ -159,7 +160,7 @@
   /* ---------- แกลเลอรี: รวมไพ่ทั้งหมดจัดเรียงสวยๆ ---------- */
   const css = document.createElement('style');
   css.textContent = `
-  #galBtn{position:fixed;top:max(14px,env(safe-area-inset-top));right:14px;z-index:6;display:flex;align-items:center;gap:8px;
+  #galBtn{position:relative;z-index:6;display:flex;align-items:center;justify-content:center;gap:8px;flex-basis:100%;width:fit-content;margin:10px auto 0;
     padding:9px 16px;border-radius:999px;border:1px solid rgba(240,205,120,.55);color:#f0cd78;font:inherit;font-size:14px;
     background:rgba(18,14,36,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;
     transition:background .2s,transform .2s,box-shadow .2s}
@@ -173,12 +174,12 @@
   #gallery[hidden]{display:none}
   @keyframes galIn{from{opacity:0}to{opacity:1}}
   #galHead{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:12px;
-    max-width:1100px;margin:0 auto 18px;padding:10px 0}
+    width:100%;max-width:1100px;margin:0 auto 18px;padding:10px 0}
   #galHead h2{margin:0;font-size:clamp(17px,4.5vw,22px);font-weight:600;color:#f0cd78;letter-spacing:.02em}
   #galHead small{display:block;font-size:12px;font-weight:400;color:rgba(255,255,255,.55);margin-top:2px}
   #galClose{width:40px;height:40px;border-radius:50%;border:1px solid rgba(240,205,120,.5);background:rgba(18,14,36,.8);
     color:#f0cd78;font-size:20px;line-height:1;cursor:pointer;flex:none}
-  #galGrid{max-width:1100px;margin:0 auto;display:grid;gap:clamp(12px,2.5vw,22px);
+  #galGrid{width:100%;max-width:1100px;margin:0 auto;display:grid;gap:clamp(12px,2.5vw,22px);
     grid-template-columns:repeat(auto-fill,minmax(clamp(96px,28vw,170px),1fr))}
   .gc{position:relative;padding:0;border:0;background:none;cursor:pointer;font:inherit;color:inherit;text-align:center;
     opacity:0;animation:gcIn .5s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * 28ms)}
@@ -199,7 +200,8 @@
   const gBtn = document.createElement('button');
   gBtn.id = 'galBtn'; gBtn.type = 'button'; gBtn.setAttribute('aria-label', 'ดูไพ่ทั้งหมด');
   gBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg><span>รวมไพ่ทั้งหมด</span>';
-  document.body.appendChild(gBtn);
+  if (again) again.insertAdjacentElement('afterend', gBtn);
+  else { gBtn.style.cssText = 'position:fixed;left:50%;transform:translateX(-50%);bottom:max(16px,env(safe-area-inset-bottom))'; document.body.appendChild(gBtn); }
 
   const gal = document.createElement('div');
   gal.id = 'gallery'; gal.hidden = true;
@@ -225,7 +227,7 @@
       grid.appendChild(b);
     }
   };
-  const openGallery = () => { buildGallery(); gal.hidden = false; gal.scrollTop = 0; sync(); };
+  const openGallery = () => { viewer.hidden = true; lb.hidden = true; fromGallery = false; buildGallery(); gal.hidden = false; gal.scrollTop = 0; sync(); };
   const closeGallery = () => { gal.hidden = true; sync(); };
   gBtn.onclick = openGallery;
   gal.querySelector('#galClose').onclick = closeGallery;
@@ -233,7 +235,16 @@
   addEventListener('keydown', e => { if (e.key === 'Escape' && !gal.hidden && viewer.hidden) closeGallery(); });
 
   // ซ่อนปุ่มรวมไพ่ ขณะเปิดหน้าดูไพ่/แกลเลอรีอยู่
-  function sync() { gBtn.hidden = !viewer.hidden || !gal.hidden; }
+  // ถ้า SHOP_URL ว่าง หรือยังเป็น example.com (ยังไม่มีหน้าเว็บจริง)
+  // ปุ่ม .shop เดิมในหน้าเว็บจะเปิดแกลเลอรีรวมไพ่แทนการเปิดลิงก์
+  const shopReal = !!CONFIG.SHOP_URL && !/example\.com/i.test(CONFIG.SHOP_URL);
+  const shops = document.querySelectorAll('.shop');
+  if (!shopReal) shops.forEach(a => {
+    a.href = '#'; a.removeAttribute('target');
+    a.addEventListener('click', e => { e.preventDefault(); openGallery(); });
+  });
+  const useShopBtn = false;
+  function sync() { gBtn.hidden = useShopBtn || !viewer.hidden || !gal.hidden; }
   sync();
 
   addEventListener('resize', layout);
