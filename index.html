@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tarot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="sky"></canvas>
+<header><h1 id="title"></h1><p id="sub"></p></header>
+
+<main id="stage"><div id="ring"></div></main>
+
+<footer>
+  <p id="hint"></p>
+  <button id="again" hidden>คลี่ไพ่ใหม่</button>
+  <a class="shop" target="_blank" rel="noopener"></a>
+</footer>
+
+<section id="viewer" hidden>
+  <button class="x" id="close" aria-label="ปิด">&times;</button>
+  <button class="nav prev" id="prev" aria-label="ใบก่อนหน้า">&lsaquo;</button>
+  <button class="nav next" id="next" aria-label="ใบถัดไป">&rsaquo;</button>
+  <div class="slide" id="slide">
+    <figure class="pic" id="pic">
+      <img id="img" alt="" hidden>
+      <div id="ph"></div>
+    </figure>
+    <article class="info">
+      <p class="no" id="no"></p>
+      <h2 id="nm"></h2>
+      <p class="th" id="th"></p>
+      <dl>
+        <dt>นักออกแบบ</dt><dd id="ds"></dd>
+        <dt>ความหมาย</dt><dd id="mn"></dd>
+      </dl>
+      <a class="shop" target="_blank" rel="noopener"></a>
+    </article>
+  </div>
+</section>
+
+<div id="lightbox" hidden><img id="lbImg" alt=""></div>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
