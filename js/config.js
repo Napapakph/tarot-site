@@ -24,7 +24,7 @@ const CARDS = [
   { name: "The Sun",            th: "ดวงอาทิตย์",         designer: "宮侑", meaning: "ความสุข ความสำเร็จ และความชัดเจน" },
   { name: "Temperance",         th: "ความพอดี",           designer: "Hydran Yuu", meaning: "ความสมดุล การผสานสิ่งที่ต่างกัน และความอดทน" },
   { name: "The Moon",           th: "ดวงจันทร์",          designer: "คูมผี ต้องการการพักผ่อน", meaning: "ความไม่แน่นอน ความฝัน และสิ่งที่ซ่อนอยู่" },
-  { name: "The Magician",       th: "จอมเวท",             designer: "", meaning: "พลังสร้างสรรค์ ทักษะ และการลงมือทำให้เป็นจริง" },
+  { name: "The Magician",       th: "จอมเวท",             designer: "Yuzuu Yu", meaning: "พลังสร้างสรรค์ ทักษะ และการลงมือทำให้เป็นจริง" },
   { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง",  designer: "", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ" },
   { name: "The Empress",        th: "จักรพรรดินี",        designer: "", meaning: "ความอุดมสมบูรณ์ ความงาม และการหล่อเลี้ยง" },
   { name: "The Emperor",        th: "จักรพรรดิ",          designer: "", meaning: "โครงสร้าง อำนาจ และความมั่นคง" },
