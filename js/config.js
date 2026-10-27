@@ -1,6 +1,6 @@
 // ===== ตั้งค่าหลัก: แก้ที่ไฟล์นี้ไฟล์เดียว =====
 const CONFIG = {
-  CARD_COUNT: 3,             // จำนวนไพ่ที่แสดง (รูปต้องมี tarot_1 ... tarot_N)
+  CARD_COUNT: 2,             // จำนวนไพ่ที่แสดง (รูปต้องมี tarot_1 ... tarot_N)
   FOLDER: "tarot card",       // ชื่อโฟลเดอร์รูป
   FILE_PREFIX: "tarot_",      // คำนำหน้าชื่อไฟล์
   EXT: "jpg",                 // นามสกุลไฟล์ (jpg / png / webp)
@@ -14,8 +14,8 @@ const CONFIG = {
 // ลำดับในอาเรย์ = เลขไฟล์ (ใบที่ 1 = tarot_1) ถ้าไม่ได้ใส่ ระบบจะใช้ค่าสำรองให้
 const CARDS = [
   { name: "Judgement",          th: "การพิพากษา",         designer: "Alice Zo", meaning: "การตื่นรู้ การประเมินตนเอง และการเรียกร้องใหม่" },
-  { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง", designer: "", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ" },
   { name: "The Magician",       th: "จอมเวท",             designer: "", meaning: "พลังสร้างสรรค์ ทักษะ และการลงมือทำให้เป็นจริง" },
+  { name: "The Fool",           th: "ผู้เริ่มต้นเดินทาง", designer: "", meaning: "การเริ่มต้นใหม่ ความกล้าเสี่ยง และอิสระ" },
   { name: "The High Priestess", th: "สตรีนักบวช",         designer: "", meaning: "สัญชาตญาณ ความลับ และปัญญาภายใน" },
   { name: "The Empress",        th: "จักรพรรดินี",        designer: "", meaning: "ความอุดมสมบูรณ์ ความงาม และการหล่อเลี้ยง" },
   { name: "The Emperor",        th: "จักรพรรดิ",          designer: "", meaning: "โครงสร้าง อำนาจ และความมั่นคง" },
