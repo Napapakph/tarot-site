@@ -3,6 +3,29 @@
   const N = Math.max(1, Math.floor(CONFIG.CARD_COUNT));
   const ring = $('#ring'), stage = $('#stage'), viewer = $('#viewer'), slide = $('#slide');
   const picEl = $('#pic'), img = $('#img'), ph = $('#ph'), lb = $('#lightbox'), lbImg = $('#lbImg');
+  // ชั้นสีขาวโปรโมท (เปิด/ปิดที่ CONFIG.PROMO_OVERLAY)
+  const PROMO = !!CONFIG.PROMO_OVERLAY, promoImg = $('#promoImg'), lbPromo = $('#lbPromo');
+  document.documentElement.style.setProperty('--promoOp', CONFIG.PROMO_OPACITY ?? 1);
+  if (!PROMO) { promoImg.remove(); lbPromo.remove(); }
+  else {
+    // คลุมยาวแค่ไหน: ใช้ mask แบบไล่สี (ส่วนดำ = เห็นชั้นขาว, ส่วนโปร่ง = ไม่เห็น)
+    const cover = Math.max(0, Math.min(100, CONFIG.PROMO_COVER ?? 100));
+    const fade = Math.max(0, Math.min(100, CONFIG.PROMO_FADE ?? 0));
+    const dir = { top: 'to bottom', bottom: 'to top', left: 'to right', right: 'to left' }[CONFIG.PROMO_FROM] || 'to bottom';
+    const a = Math.max(0, cover - fade / 2), b = Math.min(100, cover + fade / 2);
+    const root = document.documentElement.style;
+    if (cover < 100) {
+      // ไล่สีแบบโค้งนุ่ม (smoothstep) แทนเส้นตรง → รอยต่อละลายเนียนกว่า
+      const ease = t => t * t * (3 - 2 * t), N = 12;
+      const stops = inv => Array.from({ length: N + 1 }, (_, i) => {
+        const t = i / N, v = inv ? ease(t) : 1 - ease(t);
+        return `rgba(0,0,0,${v.toFixed(3)}) ${(a + (b - a) * t).toFixed(2)}%`;
+      }).join(', ');
+      root.setProperty('--promoMask', `linear-gradient(${dir}, ${stops(false)})`);
+      root.setProperty('--promoMaskInv', `linear-gradient(${dir}, ${stops(true)})`);  // รูปจริงโชว์ส่วนที่ไม่ได้คลุม
+    }
+    if ((CONFIG.PROMO_OPACITY ?? 1) >= 1) document.documentElement.classList.add('promo-solid');
+  }
   const hint = $('#hint'), again = $('#again');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const touchUI = matchMedia('(hover:none) and (pointer:coarse)').matches;
@@ -198,12 +221,14 @@
     $('#nm').textContent = d.name; $('#th').textContent = d.th;
     $('#ds').textContent = d.designer; $('#mn').textContent = d.meaning;
     ph.textContent = id; ph.hidden = false; img.hidden = true;
+    if (PROMO) promoImg.hidden = true;
     picEl.style.aspectRatio = ''; picEl.style.removeProperty('--msk');
     img.alt = d.name; img.src = src(id);
     slide.classList.remove('l'); void slide.offsetWidth; if (dir < 0) slide.classList.add('l');
   }
   img.onload = () => {
     img.hidden = false; ph.hidden = true;
+    if (PROMO) { promoImg.src = img.src; promoImg.hidden = false; }
     // ไม่มีกรอบแล้ว: ให้กล่องรูปมีสัดส่วนเท่ารูปจริง + ลายน้ำโชว์เฉพาะบนตัวรูป (ไม่ลอยบนพื้นโปร่งใส)
     if (img.naturalWidth) picEl.style.aspectRatio = img.naturalWidth + ' / ' + img.naturalHeight;
     // (เปิดไฟล์ตรงๆ แบบ file:// เบราว์เซอร์ไม่ยอมใช้รูปเป็น mask → ข้ามไป ลายน้ำจะเต็มกรอบแทน)
@@ -260,6 +285,7 @@
   lb.addEventListener('touchstart', e => { const t = e.touches[0]; swipeStart(t.clientX, t.clientY); }, { passive: true });
   lb.addEventListener('touchend', e => { const t = e.changedTouches[0]; if (swipeEnd(t.clientX, t.clientY)) lbImg.src = img.src; }, { passive: true });
   img.addEventListener('load', () => { if (!lb.hidden) lbImg.src = img.src; });
+  if (PROMO) lbImg.addEventListener('load', () => { lbPromo.src = lbImg.src; lbPromo.hidden = false; });
 
   /* ---------- แกลเลอรี: รวมไพ่ทั้งหมดจัดเรียงสวยๆ ---------- */
   const css = document.createElement('style');
@@ -332,6 +358,11 @@
       im.onload = () => { b.querySelector('.ph').hidden = true; };
       im.onerror = () => { im.remove(); };
       im.src = src(id);
+      if (PROMO) {                                   // ชั้นสีขาวบนรูปในแกลเลอรี
+        const pm = document.createElement('img'); pm.className = 'promo'; pm.alt = ''; pm.loading = 'lazy';
+        pm.setAttribute('aria-hidden', 'true'); pm.onerror = () => pm.remove(); pm.src = im.src;
+        im.after(pm);
+      }
       b.onclick = () => openAt(order.indexOf(id), true);
       grid.appendChild(b);
     }
