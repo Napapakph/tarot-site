@@ -603,7 +603,7 @@
     $('#close').setAttribute('aria-label', t.close); $('#galClose').setAttribute('aria-label', t.close);
     $('#prev').setAttribute('aria-label', t.prev); $('#next').setAttribute('aria-label', t.next);
     if (!viewer.hidden) fillInfo(info(order[cur]));       // อัปเดตไพ่ที่เปิดอยู่ทันที
-    if (!gal.hidden) buildGallery();
+    buildGallery();                                        // อัปเดตชื่อในแกลเลอรีด้วย (แม้ยังไม่ได้เปิดอยู่)
   }
 
   layout(); setMode('fan'); applyLang(); requestAnimationFrame(frame);

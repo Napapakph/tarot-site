@@ -153,10 +153,11 @@ dd{line-height:1.8;margin-top:4px}
 #sndBtn.off .sl{opacity:1}
 
 /* ---------- ปุ่ม TH / EN ---------- */
-#langBtn{position:fixed;z-index:40;top:max(14px,env(safe-area-inset-top));left:64px;height:42px;padding:0 5px;border-radius:999px;
-  display:flex;align-items:center;gap:2px;background:rgba(18,14,36,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+/* วางใต้ปุ่มเสียง แบบแนวตั้ง (กว้างเท่าปุ่มเสียง 42px) */
+#langBtn{position:fixed;z-index:40;top:calc(max(14px,env(safe-area-inset-top)) + 50px);left:14px;width:42px;padding:4px 0;border-radius:999px;
+  display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(18,14,36,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
   border:1px solid rgba(240,205,120,.55);color:#f0cd78;font:600 12px/1 Cinzel,serif;letter-spacing:.08em}
-#langBtn span{padding:8px 9px;border-radius:999px;opacity:.55;transition:background .2s,opacity .2s,color .2s}
+#langBtn span{width:34px;padding:9px 0;text-align:center;border-radius:999px;opacity:.55;transition:background .2s,opacity .2s,color .2s}
 #langBtn[data-lang="th"] [data-l="th"],#langBtn[data-lang="en"] [data-l="en"]{opacity:1;background:#f0cd78;color:#1a1030}
 #langBtn:hover{box-shadow:0 0 16px rgba(240,205,120,.3)}
 
@@ -180,3 +181,6 @@ dd{line-height:1.8;margin-top:4px}
 .detail p b{display:block;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.14em;margin-bottom:1px}
 @keyframes detIn{from{opacity:0;transform:translateY(-8px)}}
 @media (max-aspect-ratio:1/1){.detail{max-height:none}}
+
+/* แกลเลอรี: เว้นที่ด้านซ้ายให้คอลัมน์ปุ่มเสียง/ภาษา (จอกว้างเกิน 1240px มีที่ว่างพออยู่แล้ว) */
+@media (max-width:1240px){#gallery#gallery{padding-left:max(66px,env(safe-area-inset-left))}}
