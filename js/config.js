@@ -4,6 +4,7 @@ const CONFIG = {
   FOLDER: "tarot card",       // ชื่อโฟลเดอร์รูป
   FILE_PREFIX: "tarot_",      // คำนำหน้าชื่อไฟล์
   EXT: "jpg",                 // นามสกุลไฟล์ (jpg / png / webp)
+  OPTIMIZED_IMAGES: true,     // true = ใช้รูปย่อ (โหลดเร็ว) จาก "tarot card/web" และ "tarot card/thumb" — สร้างด้วย  python optimize-images.py
   TITLE: "Tarot of Design",
   SUBTITLE: "เปิดไพ่หนึ่งใบ ให้ผลงานออกแบบเล่าเรื่องของคุณ",
   SUBTITLE_EN: "Draw one card and let the artwork tell your story",  // คำโปรยภาษาอังกฤษ

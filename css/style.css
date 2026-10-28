@@ -182,5 +182,26 @@ dd{line-height:1.8;margin-top:4px}
 @keyframes detIn{from{opacity:0;transform:translateY(-8px)}}
 @media (max-aspect-ratio:1/1){.detail{max-height:none}}
 
-/* แกลเลอรี: เว้นที่ด้านซ้ายให้คอลัมน์ปุ่มเสียง/ภาษา (จอกว้างเกิน 1240px มีที่ว่างพออยู่แล้ว) */
-@media (max-width:1240px){#gallery#gallery{padding-left:max(66px,env(safe-area-inset-left))}}
+/* ปุ่มเพลง/ภาษา โชว์เฉพาะหน้าแรก: ซ่อนแบบค่อยๆ จางเมื่ออยู่หน้าแกลเลอรีหรือหน้าดูไพ่ */
+#sndBtn,#langBtn{transition:opacity .25s,visibility .25s}
+body.subpage #sndBtn,body.subpage #langBtn{opacity:0;visibility:hidden;pointer-events:none}
+
+/* ---------- มือถือทุกขนาด: ปรับเพิ่ม ---------- */
+/* จอแคบ: ชื่อเว็บไม่ให้ไปอยู่ใต้ปุ่มเสียง/ภาษา */
+@media (max-width:480px){
+  header{padding-left:64px;padding-right:64px}
+  h1{letter-spacing:.14em;font-size:clamp(15px,4.6vw,20px);line-height:1.35}
+  header p{font-size:12px;line-height:1.5}
+}
+/* แกลเลอรี: พื้นหลังทึบ (ไม่เห็นหัวเว็บทะลุ) + หัวข้อมีพื้นหลัง ไพ่เลื่อนลอดได้ไม่ทับตัวหนังสือ */
+#gallery#gallery{background-color:#0a0716}
+#gallery #galHead{background:linear-gradient(#0d0920 75%,rgba(13,9,32,0));padding-bottom:16px}
+/* iPhone Safari / Chrome มือถือ: แถบที่อยู่เว็บทำให้ vh สูงเกินจริง → ใช้ dvh (ความสูงจอที่เห็นจริง) */
+@supports (height:1dvh){
+  .slide{max-height:94dvh}
+  .pic{height:min(66dvh,580px)}
+  #lightbox img{max-height:100dvh}
+  @media (max-aspect-ratio:1/1){.pic{height:min(44dvh,420px)}}
+}
+/* หัวแกลเลอรีชิดขอบบนสุด ไม่มีช่องให้ไพ่โผล่ */
+#gallery #galHead{top:calc(-1 * max(18px,env(safe-area-inset-top)));margin-top:calc(-1 * max(18px,env(safe-area-inset-top)));padding-top:calc(max(18px,env(safe-area-inset-top)) + 10px)}

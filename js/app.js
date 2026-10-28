@@ -54,7 +54,19 @@
   try { const v = localStorage.getItem('tarot-lang'); if (TXT[v]) lang = v; } catch (e) { }
   const L = () => TXT[lang];
 
-  const src = id => encodeURI(`${CONFIG.FOLDER}/${CONFIG.FILE_PREFIX}${id}.${CONFIG.EXT}`);
+  // ที่อยู่รูป: kind = 'web' (หน้าดูไพ่) / 'thumb' (แกลเลอรี) / 'orig' (ไฟล์ต้นฉบับ)
+  const OPT = CONFIG.OPTIMIZED_IMAGES !== false;
+  const orig = id => encodeURI(`${CONFIG.FOLDER}/${CONFIG.FILE_PREFIX}${id}.${CONFIG.EXT}`);
+  const src = (id, kind = 'web') => OPT && kind !== 'orig'
+    ? encodeURI(`${CONFIG.FOLDER}/${kind}/${CONFIG.FILE_PREFIX}${id}.webp`) : orig(id);
+  // ถ้ายังไม่มีไฟล์ย่อ (เพิ่มไพ่ใหม่แต่ยังไม่ได้รัน optimize-images.py) → ถอยไปใช้ต้นฉบับเอง
+  const withFallback = (el, id, kind, onFail) => {
+    el.onerror = () => { if (OPT && !el.dataset.fb) { el.dataset.fb = 1; el.src = orig(id); } else onFail && onFail(); };
+    delete el.dataset.fb; el.src = src(id, kind);
+  };
+  // โหลดรูปใบก่อนหน้า/ถัดไปรอไว้ล่วงหน้า → เลื่อนแล้วขึ้นทันที
+  const preloaded = new Set();
+  const preload = id => { if (preloaded.has(id)) return; preloaded.add(id); const i = new Image(); i.decoding = 'async'; i.src = src(id); };
   const safeUrl = u => /^https?:\/\//i.test(String(u || '').trim()) ? String(u).trim() : '';   // รับเฉพาะลิงก์ http(s)
   const info = id => {
     const c = CARDS[id - 1] || {}, en = lang === 'en';
@@ -107,11 +119,13 @@
   let cw, Ro, Rf, spread, stars = [], dpr = 1;
   const cv = $('#sky'), cx = cv.getContext('2d');
   function layout() {
-    cw = Math.max(58, Math.min(120, Math.min(innerWidth, innerHeight) * 0.14));
+    cw = Math.max(46, Math.min(120, Math.min(innerWidth, innerHeight) * 0.14));   // จอเล็กมาก (320px) ไพ่ย่อลงได้อีกนิด จะได้ไม่ล้นขอบ
     document.documentElement.style.setProperty('--cw', cw + 'px');
     Ro = Math.max(cw * 2.2, N * cw * 1.12 / (2 * Math.PI));
-    Rf = Math.min(innerWidth * 0.46, innerHeight * 0.62);
     spread = Math.min(150, N * 10);
+    // รัศมีพัด: ให้ไพ่ใบริมสุดยังอยู่ในจอ (สำคัญบนมือถือแนวตั้ง)
+    const fit = (innerWidth / 2 - cw * 0.95) / Math.max(.3, Math.sin(spread / 2 * Math.PI / 180));
+    Rf = Math.max(cw * 2, Math.min(innerWidth * 0.46, innerHeight * 0.62, fit));
     dpr = Math.min(2, devicePixelRatio || 1);
     cv.width = innerWidth * dpr; cv.height = innerHeight * dpr;
     const n = Math.min(220, innerWidth * innerHeight / 7000 | 0);
@@ -246,7 +260,7 @@
     ph.textContent = id; ph.hidden = false; img.hidden = true;
     if (PROMO) promoImg.hidden = true;
     picEl.style.aspectRatio = ''; picEl.style.removeProperty('--msk');
-    img.alt = d.name; img.src = src(id);
+    img.alt = d.name; withFallback(img, id, 'web', () => { img.hidden = true; ph.hidden = false; });
     slide.classList.remove('l'); void slide.offsetWidth; if (dir < 0) slide.classList.add('l');
   }
   img.onload = () => {
@@ -257,7 +271,7 @@
     // (เปิดไฟล์ตรงๆ แบบ file:// เบราว์เซอร์ไม่ยอมใช้รูปเป็น mask → ข้ามไป ลายน้ำจะเต็มกรอบแทน)
     if (/^https?:/.test(location.protocol)) picEl.style.setProperty('--msk', `url("${img.src}")`);
   };
-  img.onerror = () => { img.hidden = true; ph.hidden = false; };
+  img.addEventListener('load', () => { if (N > 1) { preload(order[(cur + 1) % N]); preload(order[(cur - 1 + N) % N]); } });
 
   /* ---------- รายละเอียดไพ่: ชื่อ, นักวาด (+ลิงก์), ความหมายสั้น/ยาว ---------- */
   const more = $('#more'), detail = $('#detail');
@@ -413,11 +427,12 @@
       b.querySelector('.th').textContent = d.th; b.querySelector('.th').hidden = !d.th;
       const im = b.querySelector('img'); im.alt = d.name;
       im.onload = () => { b.querySelector('.ph').hidden = true; };
-      im.onerror = () => { im.remove(); };
-      im.src = src(id);
+      im.decoding = 'async';
+      withFallback(im, id, 'thumb', () => im.remove());
       if (PROMO) {                                   // ชั้นสีขาวบนรูปในแกลเลอรี
         const pm = document.createElement('img'); pm.className = 'promo'; pm.alt = ''; pm.loading = 'lazy';
-        pm.setAttribute('aria-hidden', 'true'); pm.onerror = () => pm.remove(); pm.src = im.src;
+        pm.setAttribute('aria-hidden', 'true'); pm.decoding = 'async'; pm.onerror = () => pm.remove();
+        im.addEventListener('load', () => { pm.src = im.currentSrc || im.src; });
         im.after(pm);
       }
       b.onclick = () => openAt(order.indexOf(id), true);
@@ -441,7 +456,12 @@
     a.addEventListener('click', e => { e.preventDefault(); openGallery(); });
   });
   const useShopBtn = false;
-  function sync() { gBtn.hidden = useShopBtn || !viewer.hidden || !gal.hidden; if (!viewer.hidden) startVfx(); }
+  function sync() {
+    gBtn.hidden = useShopBtn || !viewer.hidden || !gal.hidden;
+    // ปุ่มเพลง + ปุ่มภาษา โชว์เฉพาะหน้าแรก (ซ่อนตอนเปิดแกลเลอรี/หน้าดูไพ่)
+    document.body.classList.toggle('subpage', !viewer.hidden || !gal.hidden);
+    if (!viewer.hidden) startVfx();
+  }
   sync();
 
 
