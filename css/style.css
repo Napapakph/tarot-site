@@ -151,3 +151,32 @@ dd{line-height:1.8;margin-top:4px}
 #sndBtn .sl{stroke:currentColor;stroke-width:2;stroke-linecap:round;opacity:0}
 #sndBtn.off{opacity:.6}
 #sndBtn.off .sl{opacity:1}
+
+/* ---------- ปุ่ม TH / EN ---------- */
+#langBtn{position:fixed;z-index:40;top:max(14px,env(safe-area-inset-top));left:64px;height:42px;padding:0 5px;border-radius:999px;
+  display:flex;align-items:center;gap:2px;background:rgba(18,14,36,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(240,205,120,.55);color:#f0cd78;font:600 12px/1 Cinzel,serif;letter-spacing:.08em}
+#langBtn span{padding:8px 9px;border-radius:999px;opacity:.55;transition:background .2s,opacity .2s,color .2s}
+#langBtn[data-lang="th"] [data-l="th"],#langBtn[data-lang="en"] [data-l="en"]{opacity:1;background:#f0cd78;color:#1a1030}
+#langBtn:hover{box-shadow:0 0 16px rgba(240,205,120,.3)}
+
+/* ---------- นักวาด: ลิงก์เฟซบุ๊ก ---------- */
+#ds a{color:inherit;text-decoration:underline;text-decoration-color:rgba(216,182,92,.6);text-underline-offset:4px;
+  display:inline-flex;align-items:center;gap:6px;transition:color .2s}
+#ds a:hover{color:var(--gold)}
+#ds a svg{width:14px;height:14px;fill:var(--gold);flex:none}
+
+/* ---------- ความหมายแบบยาว ---------- */
+.more{margin-top:14px;padding:7px 16px;border-radius:999px;font-size:13px;letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px;
+  background:rgba(216,182,92,.08);transition:background .2s,box-shadow .2s}
+.more::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .25s}
+.more[aria-expanded="true"]::after{transform:translateY(2px) rotate(-135deg)}
+.more:hover{background:rgba(216,182,92,.18);box-shadow:0 0 14px rgba(216,182,92,.25)}
+.detail{margin-top:14px;padding:14px 16px 4px;border-left:2px solid rgba(216,182,92,.55);border-radius:0 10px 10px 0;
+  background:linear-gradient(90deg,rgba(216,182,92,.09),rgba(216,182,92,.02));max-height:min(42vh,400px);overflow:auto;
+  text-align:left;animation:detIn .35s ease;overscroll-behavior:contain}
+.detail p{font-size:14px;line-height:1.75;margin:0 0 12px}
+.detail p b{display:block;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.14em;margin-bottom:1px}
+@keyframes detIn{from{opacity:0;transform:translateY(-8px)}}
+@media (max-aspect-ratio:1/1){.detail{max-height:none}}

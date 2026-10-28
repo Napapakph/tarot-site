@@ -29,16 +29,40 @@
   const hint = $('#hint'), again = $('#again');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const touchUI = matchMedia('(hover:none) and (pointer:coarse)').matches;
-  const HINT = touchUI
-    ? { fan: 'แตะหรือปัดเพื่อสับไพ่', orbit: 'ปัดเพื่อหมุน · แตะเลือกไพ่ 1 ใบ' }
-    : { fan: 'คลิกหรือเลื่อนเมาส์เพื่อสับไพ่', orbit: 'เลื่อนเมาส์ / ลาก เพื่อหมุน · คลิกไพ่ที่ดึงดูดคุณ 1 ใบ' };
+  /* ---------- ภาษา TH / EN: ข้อความทั้งหมดของเว็บอยู่ที่นี่ ---------- */
+  const TXT = {
+    th: {
+      sub: CONFIG.SUBTITLE, shop: CONFIG.SHOP_LABEL, defDesigner: CONFIG.DEFAULT_DESIGNER,
+      hint: touchUI ? { fan: 'แตะหรือปัดเพื่อสับไพ่', orbit: 'ปัดเพื่อหมุน · แตะเลือกไพ่ 1 ใบ' }
+                    : { fan: 'คลิกหรือเลื่อนเมาส์เพื่อสับไพ่', orbit: 'เลื่อนเมาส์ / ลาก เพื่อหมุน · คลิกไพ่ที่ดึงดูดคุณ 1 ใบ' },
+      again: 'คลี่ไพ่ใหม่', all: 'รวมไพ่ทั้งหมด', galTitle: 'ไพ่ทั้งหมด', galSub: 'แตะไพ่เพื่อดูรายละเอียด',
+      designer: 'นักออกแบบ', meaning: 'ความหมาย', more: 'อ่านเพิ่มเติม', less: 'ย่อ',
+      tip: '← ปัดซ้าย-ขวาเพื่อเปลี่ยนไพ่ →', noMeaning: 'ยังไม่ได้ใส่ความหมายของไพ่ใบนี้',
+      close: 'ปิด', prev: 'ใบก่อนหน้า', next: 'ใบถัดไป', fb: 'เปิดเฟซบุ๊กของนักวาด', lang: 'เปลี่ยนเป็นภาษาอังกฤษ',
+    },
+    en: {
+      sub: CONFIG.SUBTITLE_EN || CONFIG.SUBTITLE, shop: CONFIG.SHOP_LABEL_EN || CONFIG.SHOP_LABEL, defDesigner: 'Artist',
+      hint: touchUI ? { fan: 'Tap or swipe to shuffle', orbit: 'Swipe to spin · Tap the card that calls you' }
+                    : { fan: 'Click or scroll to shuffle', orbit: 'Scroll / drag to spin · Click the card that calls you' },
+      again: 'Spread again', all: 'All cards', galTitle: 'All Cards', galSub: 'Tap a card to see its details',
+      designer: 'Artist', meaning: 'Meaning', more: 'Read more', less: 'Show less',
+      tip: '← Swipe left / right to change cards →', noMeaning: 'No meaning added for this card yet',
+      close: 'Close', prev: 'Previous card', next: 'Next card', fb: "Open the artist's Facebook", lang: 'Switch to Thai',
+    },
+  };
+  let lang = CONFIG.DEFAULT_LANG === 'en' ? 'en' : 'th';
+  try { const v = localStorage.getItem('tarot-lang'); if (TXT[v]) lang = v; } catch (e) { }
+  const L = () => TXT[lang];
 
   const src = id => encodeURI(`${CONFIG.FOLDER}/${CONFIG.FILE_PREFIX}${id}.${CONFIG.EXT}`);
+  const safeUrl = u => /^https?:\/\//i.test(String(u || '').trim()) ? String(u).trim() : '';   // รับเฉพาะลิงก์ http(s)
   const info = id => {
-    const c = CARDS[id - 1] || {};
-    return { name: c.name || `Card ${id}`, th: c.th || '',
-      designer: c.designer || CONFIG.DEFAULT_DESIGNER,
-      meaning: c.meaning || 'ยังไม่ได้ใส่ความหมายของไพ่ใบนี้' };
+    const c = CARDS[id - 1] || {}, en = lang === 'en';
+    return { name: c.name || `Card ${id}`, th: en ? '' : (c.th || ''),
+      designer: String(c.designer || '').trim() || L().defDesigner,
+      url: safeUrl(c.designer_url),
+      meaning: (en ? c.meaning_en || c.meaning : c.meaning) || L().noMeaning,     // ไม่มีอังกฤษ → ใช้ไทยแทน
+      detail: (en ? c.detail_en || c.detail : c.detail) || '' };
   };
 
   /* ---------- ลายน้ำ: สร้างรูป SVG แล้วใส่เป็น CSS variable --wm ---------- */
@@ -154,7 +178,7 @@
     requestAnimationFrame(frame);
   }
 
-  const setMode = m => { mode = m; hint.textContent = HINT[m]; again.hidden = m === 'fan'; stage.classList.toggle('orbit', m === 'orbit'); };
+  const setMode = m => { mode = m; hint.textContent = L().hint[m]; again.hidden = m === 'fan'; stage.classList.toggle('orbit', m === 'orbit'); };
   const sfx = (k, a) => { try { window.Snd && Snd[k](a); } catch (e) { } };   // เรียกเสียง (ถ้ามี)
   const startOrbit = v => { shuffle(); vel = v; setMode('orbit'); sfx('shuffle'); };
   stage.addEventListener('click', e => {
@@ -218,8 +242,7 @@
     cur = (p % N + N) % N;
     const id = order[cur], d = info(id);
     $('#no').textContent = `${cur + 1} / ${N}`;
-    $('#nm').textContent = d.name; $('#th').textContent = d.th;
-    $('#ds').textContent = d.designer; $('#mn').textContent = d.meaning;
+    fillInfo(d);
     ph.textContent = id; ph.hidden = false; img.hidden = true;
     if (PROMO) promoImg.hidden = true;
     picEl.style.aspectRatio = ''; picEl.style.removeProperty('--msk');
@@ -235,8 +258,42 @@
     if (/^https?:/.test(location.protocol)) picEl.style.setProperty('--msk', `url("${img.src}")`);
   };
   img.onerror = () => { img.hidden = true; ph.hidden = false; };
+
+  /* ---------- รายละเอียดไพ่: ชื่อ, นักวาด (+ลิงก์), ความหมายสั้น/ยาว ---------- */
+  const more = $('#more'), detail = $('#detail');
+  let expanded = false;                       // เปิดอ่านแบบยาวค้างไว้ แม้เลื่อนไปใบอื่น
+  const extIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.4l-8.3 8.3-1.4-1.4L17.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/></svg>';
+  function fillInfo(d) {
+    $('#nm').textContent = d.name; $('#th').textContent = d.th; $('#th').hidden = !d.th;
+    const ds = $('#ds'); ds.textContent = '';
+    if (d.url) {                              // ชื่อนักวาดเป็นลิงก์ไปเฟซบุ๊ก
+      const a = document.createElement('a');
+      a.href = d.url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.title = L().fb;
+      a.append(d.designer); a.insertAdjacentHTML('beforeend', extIcon);
+      ds.append(a);
+    } else ds.textContent = d.designer;
+    $('#mn').textContent = d.meaning;
+    // ความหมายแบบยาว: แต่ละบรรทัด "หัวข้อ: เนื้อหา" → หัวข้อสีทอง
+    detail.textContent = '';
+    d.detail.split('\n').map(x => x.trim()).filter(Boolean).forEach(line => {
+      const p = document.createElement('p'), m = line.match(/^([^:：]{1,24})[:：]\s*(.+)$/);
+      if (m) { const b = document.createElement('b'); b.textContent = m[1]; p.append(b, m[2]); } else p.textContent = line;
+      detail.append(p);
+    });
+    const has = !!d.detail.trim();
+    more.hidden = !has; detail.hidden = !(has && expanded);
+    more.setAttribute('aria-expanded', has && expanded); more.textContent = expanded ? L().less : L().more;
+    detail.scrollTop = 0;
+  }
+  more.addEventListener('click', e => {
+    e.stopPropagation(); expanded = !expanded;
+    detail.hidden = !expanded; more.setAttribute('aria-expanded', expanded);
+    more.textContent = expanded ? L().less : L().more;
+    sfx(expanded ? 'gallery' : 'close');
+    if (expanded) setTimeout(() => detail.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }), 50);
+  });
   let fromGallery = false;
-  const tip = document.createElement('div'); tip.id = 'swipeTip'; tip.textContent = '← ปัดซ้าย-ขวาเพื่อเปลี่ยนไพ่ →'; document.body.appendChild(tip);
+  const tip = document.createElement('div'); tip.id = 'swipeTip'; document.body.appendChild(tip);
   let tipShown = false;
   const showTip = () => {
     if (tipShown || !matchMedia('(hover:none) and (pointer:coarse)').matches) return;
@@ -353,7 +410,7 @@
       b.innerHTML = '<span class="fr wm"><span class="ph"></span><img loading="lazy" alt=""></span><span class="nm"></span><span class="th"></span>';
       b.querySelector('.ph').textContent = id;
       b.querySelector('.nm').textContent = d.name;
-      b.querySelector('.th').textContent = d.th;
+      b.querySelector('.th').textContent = d.th; b.querySelector('.th').hidden = !d.th;
       const im = b.querySelector('img'); im.alt = d.name;
       im.onload = () => { b.querySelector('.ph').hidden = true; };
       im.onerror = () => { im.remove(); };
@@ -519,5 +576,35 @@
   addEventListener('resize', () => { if (vfxOn) vfxSize(); });
 
   addEventListener('resize', layout);
-  layout(); setMode('fan'); requestAnimationFrame(frame);
+  /* ---------- ปุ่ม TH / EN ---------- */
+  const langBtn = document.createElement('button');
+  langBtn.id = 'langBtn'; langBtn.type = 'button';
+  langBtn.innerHTML = '<span data-l="th">TH</span><span data-l="en">EN</span>';
+  langBtn.addEventListener('click', e => {
+    e.stopPropagation(); lang = lang === 'th' ? 'en' : 'th';
+    try { localStorage.setItem('tarot-lang', lang); } catch (err) { }
+    applyLang(); sfx('slide');
+  });
+  document.body.appendChild(langBtn);
+  function applyLang() {
+    const t = L();
+    document.documentElement.lang = lang;
+    langBtn.dataset.lang = lang; langBtn.title = t.lang; langBtn.setAttribute('aria-label', t.lang);
+    $('#sub').textContent = t.sub;
+    hint.textContent = t.hint[mode];
+    if (again) again.textContent = t.again;
+    gBtn.querySelector('span').textContent = t.all; gBtn.setAttribute('aria-label', t.all);
+    gal.querySelector('#galHead h2').firstChild.textContent = t.galTitle;
+    gal.querySelector('#galHead small').textContent = t.galSub;
+    gal.setAttribute('aria-label', t.galTitle);
+    $('#lblDs').textContent = t.designer; $('#lblMn').textContent = t.meaning;
+    document.querySelectorAll('.shop').forEach(a => { a.textContent = t.shop; });
+    tip.textContent = t.tip;
+    $('#close').setAttribute('aria-label', t.close); $('#galClose').setAttribute('aria-label', t.close);
+    $('#prev').setAttribute('aria-label', t.prev); $('#next').setAttribute('aria-label', t.next);
+    if (!viewer.hidden) fillInfo(info(order[cur]));       // อัปเดตไพ่ที่เปิดอยู่ทันที
+    if (!gal.hidden) buildGallery();
+  }
+
+  layout(); setMode('fan'); applyLang(); requestAnimationFrame(frame);
 })();
