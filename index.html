@@ -11,6 +11,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+Thai:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<!-- Vercel Web Analytics (เว็บ HTML ธรรมดาใช้แค่ script นี้ ไม่ต้อง npm install) — ต้องกด Enable Analytics ใน Vercel dashboard ด้วย -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <canvas id="sky"></canvas>
@@ -35,7 +40,6 @@
     <div class="pw" id="pw">
       <figure class="pic wm" id="pic">
         <img id="img" alt="" hidden decoding="async" fetchpriority="high">
-        <img class="promo" id="promoImg" alt="" hidden aria-hidden="true">
         <div id="ph"></div>
       </figure>
     </div>
@@ -55,7 +59,7 @@
   </div>
 </section>
 
-<div id="lightbox" hidden><div class="wm" id="lbWrap"><img id="lbImg" alt=""><img class="promo" id="lbPromo" alt="" hidden aria-hidden="true"></div></div>
+<div id="lightbox" hidden><div class="wm" id="lbWrap"><img id="lbImg" alt=""></div></div>
 
 <script src="js/config.js"></script>
 <script src="js/sound.js"></script>

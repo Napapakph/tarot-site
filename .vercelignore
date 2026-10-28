@@ -1,0 +1,7 @@
+# สร้างอัตโนมัติโดย optimize-images.py — ไฟล์ในรายการนี้จะไม่ถูกอัปโหลด/เปิดให้ดูบน Vercel
+optimize-images.py
+tarot card/README.txt
+tarot card/tarot_*
+# โหมดโปรโมท: รูปจริงไม่ขึ้นเว็บ ส่งเฉพาะรูปที่ทับสีขาวแล้ว
+tarot card/web/
+tarot card/thumb/
