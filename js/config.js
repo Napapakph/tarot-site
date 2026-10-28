@@ -125,13 +125,13 @@ const CARDS = [
     detail_en: "Overview: A time to step back from the noise and hear yourself clearly. The lantern in his hand is the wisdom inside you.\nLove: You may need personal space, or you're thinking about what kind of love you truly want. Being alone doesn't always mean being lonely.\nWork: Good for deep focus, research, or long-term planning. Wise advice may come from someone experienced.\nAdvice: Turn down the outside noise for a while. The answer you're looking for may be in your own quiet.",
   },
   {
-    name: "Death", th: "ความตาย",
-    designer: "อามามิยะ มะม่วง",
-    designer_url: "https://www.facebook.com/profile.php?id=100075551163988",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "การสิ้นสุดเพื่อเริ่มต้นใหม่ และการเปลี่ยนแปลงครั้งใหญ่",
-    meaning_en: "An ending that makes room for a new beginning",
-    detail: "ภาพรวม: ไม่ได้หมายถึงความตายจริงๆ แต่คือการจบสิ่งเก่าเพื่อเปิดทางให้สิ่งใหม่ เหมือนใบไม้ร่วงก่อนฤดูใหม่จะมา\nความรัก: ความสัมพันธ์กำลังเปลี่ยนรูปแบบ อาจเป็นการปล่อยวางสิ่งที่ไม่ใช่ หรือเปลี่ยนจากแบบเดิมไปสู่ความผูกพันที่ลึกขึ้น\nการงาน: การเปลี่ยนแปลงครั้งใหญ่ เช่น เปลี่ยนงาน ปิดโปรเจกต์ หรือเปลี่ยนวิธีทำงาน แม้จะน่ากลัวแต่ก็จำเป็น\nคำแนะนำ: อย่ายื้อสิ่งที่หมดเวลาแล้ว ปล่อยมันไปด้วยความขอบคุณ แล้วพื้นที่ใหม่จะเกิดขึ้น",
-    detail_en: "Overview: Not literal death — it's the end of something old to make room for something new, like leaves falling before a new season.\nLove: The relationship is changing shape. You may let go of what isn't right, or move from the old pattern to a deeper bond.\nWork: A big change, like a new job, closing a project, or a new way of working. Scary, but necessary.\nAdvice: Don't hold on to what has run its course. Let it go with gratitude, and new space will open up.",
+    name: "Wheel of Fortune", th: "กงล้อแห่งโชคชะตา",
+    designer: "SA AS",
+    designer_url: "https://www.facebook.com/sa.as.990645",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
+    meaning: "วัฏจักร โชคชะตา และจุดเปลี่ยน",
+    meaning_en: "Cycles, destiny, and turning points",
+    detail: "ภาพรวม: กงล้อแห่งชีวิตกำลังหมุน ทุกอย่างมีขึ้นมีลง และตอนนี้คือจุดเปลี่ยนที่โชคชะตาเข้ามาเกี่ยวข้อง\nความรัก: อาจมีการพบเจอที่เหมือนพรหมลิขิต หรือความสัมพันธ์เข้าสู่ช่วงใหม่แบบไม่คาดคิด\nการงาน: โอกาสใหม่เข้ามาอย่างรวดเร็ว จังหวะเวลาสำคัญมาก เตรียมตัวให้พร้อมแล้วคว้าไว้\nคำแนะนำ: ยอมรับว่าบางอย่างควบคุมไม่ได้ แต่สิ่งที่ควบคุมได้คือวิธีที่เราตอบรับมัน",
+    detail_en: "Overview: The wheel of life is turning. Everything has ups and downs, and right now is a turning point where fate is involved.\nLove: A meeting that feels like destiny, or a relationship suddenly entering a new phase.\nWork: New chances arrive quickly. Timing matters — be ready and grab them.\nAdvice: Accept that some things are out of your control. What you can control is how you respond.",
   },
   {
     name: "Strength", th: "พลัง",
@@ -151,14 +151,15 @@ const CARDS = [
     detail: "ภาพรวม: พลังแห่งความอุดมสมบูรณ์ ความงาม และการเลี้ยงดู สิ่งที่คุณดูแลอย่างตั้งใจกำลังเบ่งบาน\nความรัก: ความรักอบอุ่น อ่อนโยน และเต็มไปด้วยการใส่ใจ อาจเกี่ยวกับการสร้างครอบครัวหรือความผูกพันที่ลึกซึ้งขึ้น\nการงาน: งานสร้างสรรค์และงานศิลปะรุ่งเรือง ไอเดียงอกงาม การเงินมีแนวโน้มมั่นคงและเติบโต\nคำแนะนำ: ดูแลร่างกายและใจตัวเอง ใช้เวลากับธรรมชาติและสิ่งสวยงาม แล้วความคิดสร้างสรรค์จะไหลมาเอง",
     detail_en: "Overview: The energy of abundance, beauty, and care. What you've nurtured with love is starting to bloom.\nLove: Warm, gentle, caring love. It may be about building a family or a deeper bond.\nWork: Creative and artistic work flourishes. Ideas grow, and money looks stable and growing.\nAdvice: Take care of your body and mind. Spend time with nature and beautiful things, and creativity will flow.",
   },
-  {
-    name: "Wheel of Fortune", th: "กงล้อแห่งโชคชะตา",
-    designer: "SA AS",
-    designer_url: "https://www.facebook.com/sa.as.990645",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "วัฏจักร โชคชะตา และจุดเปลี่ยน",
-    meaning_en: "Cycles, destiny, and turning points",
-    detail: "ภาพรวม: กงล้อแห่งชีวิตกำลังหมุน ทุกอย่างมีขึ้นมีลง และตอนนี้คือจุดเปลี่ยนที่โชคชะตาเข้ามาเกี่ยวข้อง\nความรัก: อาจมีการพบเจอที่เหมือนพรหมลิขิต หรือความสัมพันธ์เข้าสู่ช่วงใหม่แบบไม่คาดคิด\nการงาน: โอกาสใหม่เข้ามาอย่างรวดเร็ว จังหวะเวลาสำคัญมาก เตรียมตัวให้พร้อมแล้วคว้าไว้\nคำแนะนำ: ยอมรับว่าบางอย่างควบคุมไม่ได้ แต่สิ่งที่ควบคุมได้คือวิธีที่เราตอบรับมัน",
-    detail_en: "Overview: The wheel of life is turning. Everything has ups and downs, and right now is a turning point where fate is involved.\nLove: A meeting that feels like destiny, or a relationship suddenly entering a new phase.\nWork: New chances arrive quickly. Timing matters — be ready and grab them.\nAdvice: Accept that some things are out of your control. What you can control is how you respond.",
+
+   {
+    name: "Death", th: "ความตาย",
+    designer: "อามามิยะ มะม่วง",
+    designer_url: "https://www.facebook.com/profile.php?id=100075551163988",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
+    meaning: "การสิ้นสุดเพื่อเริ่มต้นใหม่ และการเปลี่ยนแปลงครั้งใหญ่",
+    meaning_en: "An ending that makes room for a new beginning",
+    detail: "ภาพรวม: ไม่ได้หมายถึงความตายจริงๆ แต่คือการจบสิ่งเก่าเพื่อเปิดทางให้สิ่งใหม่ เหมือนใบไม้ร่วงก่อนฤดูใหม่จะมา\nความรัก: ความสัมพันธ์กำลังเปลี่ยนรูปแบบ อาจเป็นการปล่อยวางสิ่งที่ไม่ใช่ หรือเปลี่ยนจากแบบเดิมไปสู่ความผูกพันที่ลึกขึ้น\nการงาน: การเปลี่ยนแปลงครั้งใหญ่ เช่น เปลี่ยนงาน ปิดโปรเจกต์ หรือเปลี่ยนวิธีทำงาน แม้จะน่ากลัวแต่ก็จำเป็น\nคำแนะนำ: อย่ายื้อสิ่งที่หมดเวลาแล้ว ปล่อยมันไปด้วยความขอบคุณ แล้วพื้นที่ใหม่จะเกิดขึ้น",
+    detail_en: "Overview: Not literal death — it's the end of something old to make room for something new, like leaves falling before a new season.\nLove: The relationship is changing shape. You may let go of what isn't right, or move from the old pattern to a deeper bond.\nWork: A big change, like a new job, closing a project, or a new way of working. Scary, but necessary.\nAdvice: Don't hold on to what has run its course. Let it go with gratitude, and new space will open up.",
   },
   {
     name: "The Fool", th: "ผู้เริ่มต้นเดินทาง",
@@ -169,76 +170,5 @@ const CARDS = [
     detail: "ภาพรวม: จุดเริ่มต้นของการเดินทางครั้งใหม่ หัวใจเปิดกว้าง อยากรู้อยากเห็น และกล้าก้าวไปข้างหน้าโดยไม่ต้องรู้ทุกคำตอบ\nความรัก: ความรักแบบสดใสและเป็นธรรมชาติ ลองเปิดใจกับคนใหม่ หรือเติมความสนุกให้ความสัมพันธ์เดิม\nการงาน: เหมาะกับการเริ่มสิ่งใหม่ ลองงานที่ไม่เคยทำ แต่อย่าลืมดูความเสี่ยงสักนิดก่อนกระโดด\nคำแนะนำ: เชื่อในการเดินทาง ทุกการเริ่มต้นต้องมีความกล้าแบบไร้เดียงสาบ้าง",
     detail_en: "Overview: The start of a new journey. An open, curious heart that steps forward without needing every answer.\nLove: Fresh, natural love. Open your heart to someone new, or bring more fun into your relationship.\nWork: Great for starting something new or trying unfamiliar work — just check the risks a little before you jump.\nAdvice: Trust the journey. Every beginning needs a bit of innocent courage.",
   },
-  {
-    name: "The Emperor", th: "จักรพรรดิ",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "โครงสร้าง อำนาจ และความมั่นคง",
-    meaning_en: "Structure, authority, and stability",
-    detail: "ภาพรวม: พลังของความเป็นผู้นำ ระเบียบวินัย และการสร้างรากฐานที่มั่นคง ถึงเวลาจัดการชีวิตให้เป็นระบบ\nความรัก: ความสัมพันธ์ที่มั่นคง มีความรับผิดชอบ แต่ระวังการควบคุมหรือความดื้อรั้นจนเกินไป\nการงาน: เหมาะกับการวางแผน จัดโครงสร้าง และรับบทบาทผู้นำ อาจได้รับการสนับสนุนจากผู้มีอำนาจ\nคำแนะนำ: ตั้งกฎและเป้าหมายให้ชัด แล้วทำตามอย่างมีวินัย ความมั่นคงจะเกิดจากความสม่ำเสมอ",
-    detail_en: "Overview: The energy of leadership, discipline, and building a strong foundation. Time to bring order to your life.\nLove: A stable, responsible relationship — but watch out for being too controlling or stubborn.\nWork: Good for planning, building structure, and taking the lead. Support may come from people in power.\nAdvice: Set clear rules and goals, then follow them with discipline. Stability comes from consistency.",
-  },
-  {
-    name: "The Hierophant", th: "ผู้นำศาสนา",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "ประเพณี ความเชื่อ และการเรียนรู้จากผู้รู้",
-    meaning_en: "Tradition, belief, and learning from a mentor",
-    detail: "ภาพรวม: ไพ่แห่งการเรียนรู้ ประเพณี และคุณค่าที่ส่งต่อกันมา อาจมีครูหรือผู้รู้เข้ามาชี้ทาง\nความรัก: ความสัมพันธ์ที่จริงจัง มีพิธีการหรือคำมั่นสัญญา ครอบครัวอาจมีบทบาทในการตัดสินใจ\nการงาน: ทำตามระบบและขั้นตอนที่พิสูจน์แล้วว่าได้ผล เหมาะกับการเรียนต่อ อบรม หรือหาพี่เลี้ยง\nคำแนะนำ: เรียนรู้จากผู้ที่เดินมาก่อน แต่ก็อย่าลืมถามตัวเองว่าความเชื่อไหนเป็นของเราจริงๆ",
-    detail_en: "Overview: A card of learning, tradition, and values passed down. A teacher or mentor may appear to guide you.\nLove: A serious relationship, with commitment or ceremony. Family may play a role in your decisions.\nWork: Follow proven systems and steps. Good for further study, training, or finding a mentor.\nAdvice: Learn from those who walked before you, but also ask which beliefs are truly your own.",
-  },
-  {
-    name: "The Lovers", th: "คู่รัก",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "ความรัก การเลือก และความสอดคล้องของคุณค่า",
-    meaning_en: "Love, choices, and shared values",
-    detail: "ภาพรวม: ไพ่แห่งความรักและการเลือก การตัดสินใจที่ต้องฟังทั้งหัวใจและคุณค่าที่เรายึดถือ\nความรัก: ความสัมพันธ์ที่ลึกซึ้ง เข้าใจกัน และดึงดูดกันอย่างแรง อาจต้องเลือกระหว่างทางสองทาง\nการงาน: ความร่วมมือหรือหุ้นส่วนที่ลงตัว เลือกงานที่ตรงกับคุณค่าของตัวเอง ไม่ใช่แค่สิ่งที่ง่ายที่สุด\nคำแนะนำ: ซื่อตรงกับหัวใจตัวเอง การเลือกที่ดีที่สุดคือการเลือกที่ทำให้เราเป็นตัวเองได้เต็มที่",
-    detail_en: "Overview: A card of love and choice — a decision that needs both your heart and your values.\nLove: A deep connection with strong attraction and understanding. You may need to choose between two paths.\nWork: A well-matched partnership. Choose work that fits your values, not just the easiest option.\nAdvice: Be honest with your heart. The best choice is the one that lets you be fully yourself.",
-  },
-  {
-    name: "The Chariot", th: "รถศึก",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "ชัยชนะ ความมุ่งมั่น และการควบคุมทิศทาง",
-    meaning_en: "Victory, determination, and steering your direction",
-    detail: "ภาพรวม: พลังแห่งความมุ่งมั่นและชัยชนะ คุณกำลังขับเคลื่อนชีวิตไปข้างหน้าด้วยแรงใจของตัวเอง\nความรัก: ต้องการความชัดเจนและความพยายามจากทั้งสองฝ่าย อาจมีการเดินทางหรือก้าวข้ามอุปสรรคไปด้วยกัน\nการงาน: เป้าหมายใกล้ความจริง ถ้าโฟกัสและควบคุมทิศทางได้ดี อาจมีการเดินทางหรือการเลื่อนตำแหน่ง\nคำแนะนำ: ตั้งเป้าให้ชัด จับบังเหียนให้มั่น แล้วอย่าให้ความวอกแวกดึงคุณออกนอกเส้นทาง",
-    detail_en: "Overview: The energy of determination and victory. You are driving your life forward with your own willpower.\nLove: It needs clarity and effort from both sides. You may travel together or overcome obstacles as a team.\nWork: Your goal is close, if you stay focused and in control. Travel or a promotion is possible.\nAdvice: Set a clear goal, hold the reins firmly, and don't let distractions pull you off the road.",
-  },
-  {
-    name: "The Hanged Man", th: "ชายแขวนเท้า",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "การหยุดพัก มุมมองใหม่ และการปล่อยวาง",
-    meaning_en: "A pause, a new perspective, and letting go",
-    detail: "ภาพรวม: บางครั้งการหยุดก็คือการไปข้างหน้า ลองมองโลกกลับหัวดูบ้าง แล้วจะเห็นสิ่งที่ไม่เคยเห็น\nความรัก: ความสัมพันธ์อาจรู้สึกค้างๆ ไม่ไปไหน ใช้ช่วงนี้ทำความเข้าใจตัวเองและอีกฝ่ายให้มากขึ้น\nการงาน: งานอาจล่าช้า แต่เป็นโอกาสดีที่จะทบทวนวิธีคิด เปลี่ยนมุมมอง หรือเสียสละบางอย่างเพื่อเป้าหมายที่ใหญ่กว่า\nคำแนะนำ: ปล่อยวางความอยากควบคุม ยอมรับช่วงรอ แล้วคำตอบจะมาในมุมที่คาดไม่ถึง",
-    detail_en: "Overview: Sometimes stopping is a way of moving forward. Look at the world upside down, and you'll see what you never saw before.\nLove: The relationship may feel stuck. Use this time to understand yourself and the other person better.\nWork: Things may be delayed, but it's a good time to rethink, change your view, or give something up for a bigger goal.\nAdvice: Let go of the need to control. Accept the waiting, and the answer will come from an unexpected angle.",
-  },
-  {
-    name: "The Devil", th: "ปีศาจ",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "พันธนาการ ความยึดติด และสิ่งที่ผูกมัดเราไว้",
-    meaning_en: "Chains, attachment, and what binds us",
-    detail: "ภาพรวม: ไพ่ที่ชวนให้มองโซ่ที่ผูกเราไว้ ทั้งนิสัย ความกลัว หรือความอยาก ข่าวดีคือโซ่นั้นมักหลวมพอให้เราถอดออกเองได้\nความรัก: ความดึงดูดที่แรงมาก แต่ระวังความหึงหวง ความยึดติด หรือความสัมพันธ์ที่ไม่ดีต่อใจ\nการงาน: ระวังการทำงานหนักเกินไปเพราะเงินหรือความกลัว และระวังการใช้จ่ายตามอารมณ์\nคำแนะนำ: ซื่อตรงกับตัวเองว่าอะไรกำลังควบคุมคุณอยู่ แล้วค่อยๆ ดึงพลังของตัวเองกลับมา",
-    detail_en: "Overview: This card asks you to look at the chains that hold you — habits, fears, or desires. The good news: the chains are often loose enough to take off yourself.\nLove: Very strong attraction, but watch out for jealousy, attachment, or a relationship that isn't good for your heart.\nWork: Be careful of overworking out of fear or for money, and of emotional spending.\nAdvice: Be honest about what is controlling you, then slowly take your power back.",
-  },
-  {
-    name: "The Tower", th: "หอคอย",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "การพังทลายอย่างฉับพลัน และความจริงที่ปรากฏ",
-    meaning_en: "Sudden collapse and a truth revealed",
-    detail: "ภาพรวม: สิ่งที่สร้างบนฐานไม่มั่นคงกำลังพังลงอย่างฉับพลัน อาจตกใจ แต่ความจริงที่เผยออกมาจะทำให้เราสร้างใหม่ได้แข็งแรงกว่าเดิม\nความรัก: อาจมีเรื่องที่ทำให้ความสัมพันธ์สั่นคลอน หรือความจริงบางอย่างถูกเปิดเผย สิ่งที่ไม่ใช่จะหลุดออกไปเอง\nการงาน: การเปลี่ยนแปลงไม่คาดคิด แผนอาจต้องรื้อใหม่ ตั้งสติและมองหาโอกาสในความวุ่นวาย\nคำแนะนำ: อย่ายื้อสิ่งที่กำลังพัง ปล่อยให้มันพัง แล้วสร้างใหม่บนความจริง",
-    detail_en: "Overview: Something built on a weak base is suddenly falling. It may be a shock, but the truth that comes out lets you rebuild stronger.\nLove: Something may shake the relationship, or a truth comes to light. What isn't right will fall away.\nWork: Unexpected change — plans may need rebuilding. Stay calm and look for the opportunity in the chaos.\nAdvice: Don't hold up what's falling. Let it fall, and rebuild on the truth.",
-  },
-  {
-    name: "The Star", th: "ดวงดาว",
-    designer: "",
-    designer_url: "",   // ลิงก์เฟซบุ๊กของนักวาด เช่น "https://www.facebook.com/xxxx" (ว่าง = ไม่มีลิงก์)
-    meaning: "ความหวัง การเยียวยา และแรงบันดาลใจ",
-    meaning_en: "Hope, healing, and inspiration",
-    detail: "ภาพรวม: หลังพายุผ่านไป ดวงดาวส่องแสงอีกครั้ง ไพ่แห่งความหวัง การเยียวยา และศรัทธาในอนาคต\nความรัก: หัวใจกำลังฟื้นตัว ความรักที่อ่อนโยนและจริงใจกำลังมา หรือความสัมพันธ์เดิมได้เยียวยากัน\nการงาน: แรงบันดาลใจกลับมา เหมาะกับงานสร้างสรรค์และการตั้งเป้าหมายระยะยาว สิ่งที่หวังมีโอกาสเป็นจริง\nคำแนะนำ: เชื่อว่าสิ่งดีๆ กำลังมา ดูแลใจตัวเอง แล้วปล่อยให้แสงของคุณส่องออกไป",
-    detail_en: "Overview: After the storm, the star shines again. A card of hope, healing, and faith in the future.\nLove: Your heart is healing. Gentle, sincere love is coming, or an existing relationship heals.\nWork: Inspiration returns. Great for creative work and long-term goals — your hopes can come true.\nAdvice: Believe good things are coming. Take care of your heart, and let your light shine.",
-  },
+
 ];
