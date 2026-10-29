@@ -31,7 +31,7 @@ const CONFIG = {
   NOTICE: "© All artwork belongs to its artists. Do not save, repost, or use any image (including screenshots) in AI training or image-generation datasets without permission.", // ข้อความใต้รายละเอียดไพ่
   WATERMARK_OPACITY: 0.15,                                // ความจาง 0 - 1 (เลขน้อย = จางกว่า)
   // ⚠️ โหมดโปรโมท: แก้ค่า PROMO_... แล้วต้องรัน  python optimize-images.py  ใหม่ทุกครั้ง (สีขาวถูก "อบ" ลงในไฟล์รูป) แล้วค่อย push
-  PROMO_OVERLAY: true,        // true = ทับไพ่ทุกใบด้วยเงาสีขาวตามรูปทรงงาน (โปรโมท/ทีเซอร์) / false = โชว์รูปจริง
+  PROMO_OVERLAY: false,        // true = ทับไพ่ทุกใบด้วยเงาสีขาวตามรูปทรงงาน (โปรโมท/ทีเซอร์) / false = โชว์รูปจริง
   PROMO_OPACITY: 0,           // ความทึบของชั้นสีขาว: 1 = ขาวทึบทั้งหมด, 0.7 = เห็นลายจางๆ, 0.4 = เห็นชัดขึ้น
   PROMO_COVER: 60,           // คลุมยาวแค่ไหน (% ของรูป): 100 = ทั้งใบ, 60 = 60% จากด้านที่เลือก, 0 = ไม่คลุม
   PROMO_FROM: "top",          // เริ่มคลุมจากด้านไหน: "top" บน / "bottom" ล่าง / "left" ซ้าย / "right" ขวา
