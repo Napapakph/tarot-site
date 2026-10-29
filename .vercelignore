@@ -2,6 +2,4 @@
 optimize-images.py
 tarot card/README.txt
 tarot card/tarot_*
-# โหมดโปรโมท: รูปจริงไม่ขึ้นเว็บ ส่งเฉพาะรูปที่ทับสีขาวแล้ว
-tarot card/web/
-tarot card/thumb/
+tarot card/promo/
